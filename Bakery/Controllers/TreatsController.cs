@@ -82,7 +82,7 @@ namespace Bakery.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddCategory(int id)
+    public ActionResult AddFlavor(int id)
     {
         var thisTreat = _db.Treats.FirstOrDefault(t => t.TreatId == id);
         ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Description");
@@ -90,7 +90,7 @@ namespace Bakery.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddCategory(Treat treat, int FlavorId)
+    public ActionResult AddFlavor(Treat treat, int FlavorId)
     {
         if (FlavorId != 0)
         {
@@ -116,7 +116,7 @@ namespace Bakery.Controllers
     }
 
     [HttpPost]
-    public ActionResult DeleteCategory(int joinId)
+    public ActionResult DeleteFlavor(int joinId)
     {
         var joinEntry = _db.TreatFlavor.FirstOrDefault(e => e.TreatFlavorId == joinId);
         _db.TreatFlavor.Remove(joinEntry);

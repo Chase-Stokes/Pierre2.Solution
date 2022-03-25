@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Treat
+
+<div class="jumbotron">
+  <h1>Search Results</h1>
+</div>
+
+@using (Html.BeginForm())
+{
+  @Html.TextBoxFor(model => model.Search)
+  <input type="submit" value="Search" />
+}
+
+
+@if (@ViewBag.Treats.Count == 0)
+{
+  <h3>No Results</h3>
+}
+else
+{
+  <h3>Treats from search:</h3>
+  @foreach (var t in ViewBag.Treats)
+  {
+    <li>@Html.ActionLink($"{t.Name}", "Details", "Treats", new { id = t.TreatId })</li>  
+  } 
+}
