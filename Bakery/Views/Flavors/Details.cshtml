@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Flavor;
+
+<h2>Flavor Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This flavor does not have any treats connected yet.</p>
+}
+else
+{
+  <h4>Treats for this Flavor:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@join.Treat.Name</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Category", "Edit", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Delete Category", "Delete", new { id = Model.FlavorId })</p>
