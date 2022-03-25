@@ -26,8 +26,8 @@ namespace Bakery.Controllers
 
     public ActionResult Search(string Search)
     {
-      var authors = _db.Treats.Where(t => (t.Name.Contains(Search) || (t.Name == Search))).ToList();
-      ViewBag.Treats = authors;
+      var treats = _db.Treats.Where(t => (t.Name.Contains(Search) || (t.Name == Search))).ToList();
+      ViewBag.Treats = treats;
       return View();
     }
   }

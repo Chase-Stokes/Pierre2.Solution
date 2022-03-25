@@ -5,11 +5,13 @@
 @model Bakery.Models.Treat
 
 <h4>Add a new treat</h4>
+<hr>
+<div class="formBox">
+  @using (Html.BeginForm())
+  {
+      @Html.LabelFor(model => model.Name)
+      @Html.TextBoxFor(model => model.Name)
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(model => model.Name)
-    @Html.TextBoxFor(model => model.Name)
-
-    <input type="submit" value="Add new item" class="btn btn-default" />
-}
+      <input type="submit" value="Add new item" class="btn btn-default" />
+  }
+</div>

@@ -4,37 +4,43 @@
 
 @model Bakery.Models.Treat
 
-<h2>treat Details</h2>
+<h2>Treat Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<div class="formBox">
+  <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 
-@if(@Model.JoinEntities.Count == 0)
-{
-  <p>This treat does not have any flavors connected yet.</p>
-}
-else
-{
-  <h4>Flavors this treat is connected with:</h4>
-  <ul>
-  @foreach(var join in Model.JoinEntities)
+  @if(@Model.JoinEntities.Count == 0)
   {
-    <li>@join.Flavor.Description</li>
+    <p>This treat does not have any flavors connected yet.</p>
   }
-  </ul>
-}
-
-<ul>
-  @foreach(var join in Model.JoinEntities)
+  else
   {
-    <li>@join.Flavor.Description</li>
-    @using (Html.BeginForm("DeleteFlavor", "Treats"))
+    <h4>Flavors this treat is connected with:</h4>
+    <ul>
+      @foreach(var join in Model.JoinEntities)
+      {
+        <li>@join.Flavor.Description</li>
+        @using (Html.BeginForm("DeleteFlavor", "Treats"))
+        {
+          @Html.Hidden("joinId", @join.TreatFlavorId)
+          <input type="submit" value="Delete"/>
+        }
+      }
+    </ul>
+  }
+
+  @* <ul>
+    @foreach(var join in Model.JoinEntities)
     {
-      @Html.Hidden("joinId", @join.TreatFlavorId)
-      <input type="submit" value="Delete"/>
-    }
-  }
-</ul>
-
-<p class ="btn-dark">@Html.ActionLink("Add a Category", "AddCategory", new { id = Model.TreatId })</p>
-<p class ="btn-dark">@Html.ActionLink("Edit Item", "Edit", new { id = Model.TreatId })</p>
-<p class ="btn-dark">@Html.ActionLink("Delete Item", "Delete", new { id = Model.TreatId })</p>
+      <li>@join.Flavor.Description</li>
+      @using (Html.BeginForm("DeleteFlavor", "Treats"))
+      {
+        @Html.Hidden("joinId", @join.TreatFlavorId)
+        <input type="submit" value="Delete"/>
+      }
+    } *@
+  </ul> 
+  <p class ="btn-dark">@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
+  <p class ="btn-dark">@Html.ActionLink("Edit Item", "Edit", new { id = Model.TreatId })</p>
+  <p class ="btn-dark">@Html.ActionLink("Delete Item", "Delete", new { id = Model.TreatId })</p>
+</div>

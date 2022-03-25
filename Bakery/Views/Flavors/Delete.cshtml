@@ -3,11 +3,12 @@
 }
 
 @model Bakery.Models.Flavor
+<div class="formBox">
+  <h2>Are you sure you want to delete this?</h2>
 
-<h2>Are you sure you want to delete this?</h2>
-
-@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)
-@using (Html.BeginForm())
-{
-  <input type="submit" value="Delete" />
-}
+  @Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)
+  @using (Html.BeginForm())
+  {
+    <input type="submit" value="Delete" />
+  }
+</div>

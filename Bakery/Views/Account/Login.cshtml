@@ -5,16 +5,16 @@
 @using Bakery.ViewModels
 
 @model LoginViewModel
+<div class="formBox">
+  <h4>Log in with your account</h4>
+  @using (Html.BeginForm())
+  {
+      @Html.LabelFor(m => m.Email)
+      @Html.TextBoxFor(m => m.Email)
 
-<h4>Log in with your account</h4>
-<hr />
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
+      @Html.LabelFor(m => m.Password)
+      @Html.PasswordFor(m => m.Password)
 
-    @Html.LabelFor(m => m.Password)
-    @Html.PasswordFor(m => m.Password)
-
-    <input type="submit" value="Log in" class="btn btn-default" />
-}
+      <input type="submit" value="Log in" class="btn btn-default" />
+  }
+</div>
