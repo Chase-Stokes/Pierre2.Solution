@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace Bakery.Controllers
 {
@@ -14,21 +15,17 @@ namespace Bakery.Controllers
     public class TreatsController : Controller
   {
     private readonly BakeryContext _db;
-    private readonly UserManager<ApplicationUser> _userManager;
 
-    public TreatsController(UserManager<ApplicationUser> userManager, BakeryContext db)
+    public TreatsController(BakeryContext db)
     {
-      _userManager = userManager;
       _db = db;
     }
 
     [AllowAnonymous]
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
     {
-        var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var currentUser = await _userManager.FindByIdAsync(userId);
-        var userTreats = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).ToList();
-        return View(userTreats);
+      List<Treat> model = _db.Treats.ToList();
+      return View(model);
     }
 
     public ActionResult Create()
@@ -38,11 +35,11 @@ namespace Bakery.Controllers
     }
 
     [HttpPost]
-  public async Task<ActionResult> Create(Treat treat, int FlavorId)
+  public ActionResult Create(Treat treat, int FlavorId)
   {
-      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-      treat.User = currentUser;
+      // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      // var currentUser = await _userManager.FindByIdAsync(userId);
+      // treat.User = currentUser;
       _db.Treats.Add(treat);
       _db.SaveChanges();
       if (FlavorId != 0)
